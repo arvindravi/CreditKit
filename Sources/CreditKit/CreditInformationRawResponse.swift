@@ -7,16 +7,25 @@ import Foundation
 
 // MARK: - CreditInformationRawResponse
 public struct CreditInformationRawResponse: Codable {
-    let accountIDVStatus: String
-    let creditReportInfo: CreditReportInfo
-    let dashboardStatus, personaType: String
-    let coachingSummary: CoachingSummary
-    let augmentedCreditScore: JSONNull?
+    public let accountIDVStatus: String
+    public let creditReportInfo: CreditReportInfo
+    public let dashboardStatus, personaType: String
+    public let coachingSummary: CoachingSummary
+    public let augmentedCreditScore: JSONNull?
+
+    public init(accountIDVStatus: String, creditReportInfo: CreditReportInfo, dashboardStatus: String, personaType: String, coachingSummary: CoachingSummary, augmentedCreditScore: JSONNull?) {
+        self.accountIDVStatus = accountIDVStatus
+        self.creditReportInfo = creditReportInfo
+        self.dashboardStatus = dashboardStatus
+        self.personaType = personaType
+        self.coachingSummary = coachingSummary
+        self.augmentedCreditScore = augmentedCreditScore
+    }
 }
 
 // MARK: CreditInformationRawResponse convenience initializers and mutators
 
-extension CreditInformationRawResponse {
+public extension CreditInformationRawResponse {
     init(data: Data) throws {
         self = try newJSONDecoder().decode(CreditInformationRawResponse.self, from: data)
     }
@@ -60,15 +69,23 @@ extension CreditInformationRawResponse {
 }
 
 // MARK: - CoachingSummary
-struct CoachingSummary: Codable {
-    let activeTodo, activeChat: Bool
-    let numberOfTodoItems, numberOfCompletedTodoItems: Int
-    let selected: Bool
+public struct CoachingSummary: Codable {
+    public let activeTodo, activeChat: Bool
+    public let numberOfTodoItems, numberOfCompletedTodoItems: Int
+    public let selected: Bool
+
+    public init(activeTodo: Bool, activeChat: Bool, numberOfTodoItems: Int, numberOfCompletedTodoItems: Int, selected: Bool) {
+        self.activeTodo = activeTodo
+        self.activeChat = activeChat
+        self.numberOfTodoItems = numberOfTodoItems
+        self.numberOfCompletedTodoItems = numberOfCompletedTodoItems
+        self.selected = selected
+    }
 }
 
 // MARK: CoachingSummary convenience initializers and mutators
 
-extension CoachingSummary {
+public extension CoachingSummary {
     init(data: Data) throws {
         self = try newJSONDecoder().decode(CoachingSummary.self, from: data)
     }
@@ -110,25 +127,56 @@ extension CoachingSummary {
 }
 
 // MARK: - CreditReportInfo
-struct CreditReportInfo: Codable {
-    let score, scoreBand: Int
-    let clientRef, status: String
-    let maxScoreValue, minScoreValue, monthsSinceLastDefaulted: Int
-    let hasEverDefaulted: Bool
-    let monthsSinceLastDelinquent: Int
-    let hasEverBeenDelinquent: Bool
-    let percentageCreditUsed, percentageCreditUsedDirectionFlag, changedScore, currentShortTermDebt: Int
-    let currentShortTermNonPromotionalDebt, currentShortTermCreditLimit, currentShortTermCreditUtilisation, changeInShortTermDebt: Int
-    let currentLongTermDebt, currentLongTermNonPromotionalDebt: Int
-    let currentLongTermCreditLimit, currentLongTermCreditUtilisation: JSONNull?
-    let changeInLongTermDebt, numPositiveScoreFactors, numNegativeScoreFactors, equifaxScoreBand: Int
-    let equifaxScoreBandDescription: String
-    let daysUntilNextReport: Int
+public struct CreditReportInfo: Codable {
+    public let score, scoreBand: Int
+    public let clientRef, status: String
+    public let maxScoreValue, minScoreValue, monthsSinceLastDefaulted: Int
+    public let hasEverDefaulted: Bool
+    public let monthsSinceLastDelinquent: Int
+    public let hasEverBeenDelinquent: Bool
+    public let percentageCreditUsed, percentageCreditUsedDirectionFlag, changedScore, currentShortTermDebt: Int
+    public let currentShortTermNonPromotionalDebt, currentShortTermCreditLimit, currentShortTermCreditUtilisation, changeInShortTermDebt: Int
+    public let currentLongTermDebt, currentLongTermNonPromotionalDebt: Int
+    public let currentLongTermCreditLimit, currentLongTermCreditUtilisation: JSONNull?
+    public let changeInLongTermDebt, numPositiveScoreFactors, numNegativeScoreFactors, equifaxScoreBand: Int
+    public let equifaxScoreBandDescription: String
+    public let daysUntilNextReport: Int
+
+    public init(score: Int, scoreBand: Int, clientRef: String, status: String, maxScoreValue: Int, minScoreValue: Int, monthsSinceLastDefaulted: Int, hasEverDefaulted: Bool, monthsSinceLastDelinquent: Int, hasEverBeenDelinquent: Bool, percentageCreditUsed: Int, percentageCreditUsedDirectionFlag: Int, changedScore: Int, currentShortTermDebt: Int, currentShortTermNonPromotionalDebt: Int, currentShortTermCreditLimit: Int, currentShortTermCreditUtilisation: Int, changeInShortTermDebt: Int, currentLongTermDebt: Int, currentLongTermNonPromotionalDebt: Int, currentLongTermCreditLimit: JSONNull?, currentLongTermCreditUtilisation: JSONNull?, changeInLongTermDebt: Int, numPositiveScoreFactors: Int, numNegativeScoreFactors: Int, equifaxScoreBand: Int, equifaxScoreBandDescription: String, daysUntilNextReport: Int) {
+        self.score = score
+        self.scoreBand = scoreBand
+        self.clientRef = clientRef
+        self.status = status
+        self.maxScoreValue = maxScoreValue
+        self.minScoreValue = minScoreValue
+        self.monthsSinceLastDefaulted = monthsSinceLastDefaulted
+        self.hasEverDefaulted = hasEverDefaulted
+        self.monthsSinceLastDelinquent = monthsSinceLastDelinquent
+        self.hasEverBeenDelinquent = hasEverBeenDelinquent
+        self.percentageCreditUsed = percentageCreditUsed
+        self.percentageCreditUsedDirectionFlag = percentageCreditUsedDirectionFlag
+        self.changedScore = changedScore
+        self.currentShortTermDebt = currentShortTermDebt
+        self.currentShortTermNonPromotionalDebt = currentShortTermNonPromotionalDebt
+        self.currentShortTermCreditLimit = currentShortTermCreditLimit
+        self.currentShortTermCreditUtilisation = currentShortTermCreditUtilisation
+        self.changeInShortTermDebt = changeInShortTermDebt
+        self.currentLongTermDebt = currentLongTermDebt
+        self.currentLongTermNonPromotionalDebt = currentLongTermNonPromotionalDebt
+        self.currentLongTermCreditLimit = currentLongTermCreditLimit
+        self.currentLongTermCreditUtilisation = currentLongTermCreditUtilisation
+        self.changeInLongTermDebt = changeInLongTermDebt
+        self.numPositiveScoreFactors = numPositiveScoreFactors
+        self.numNegativeScoreFactors = numNegativeScoreFactors
+        self.equifaxScoreBand = equifaxScoreBand
+        self.equifaxScoreBandDescription = equifaxScoreBandDescription
+        self.daysUntilNextReport = daysUntilNextReport
+    }
 }
 
 // MARK: CreditReportInfo convenience initializers and mutators
 
-extension CreditReportInfo {
+public extension CreditReportInfo {
     init(data: Data) throws {
         self = try newJSONDecoder().decode(CreditReportInfo.self, from: data)
     }
@@ -235,14 +283,18 @@ func newJSONEncoder() -> JSONEncoder {
 
 // MARK: - Encode/decode helpers
 
-class JSONNull: Codable, Hashable {
+public class JSONNull: Codable, Hashable {
 
     public static func == (lhs: JSONNull, rhs: JSONNull) -> Bool {
         return true
     }
 
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(0)
+    public var hashValue: Int {
+        return 0
+    }
+
+    public func hash(into hasher: inout Hasher) {
+        // No-op
     }
 
     public init() {}
