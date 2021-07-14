@@ -1,10 +1,10 @@
 import Foundation
 
 public protocol CreditKitType: AnyObject {
-    func fetchCreditScore(result: @escaping CreditKit.CreditInformationResult)
+    func fetchCreditInformation(result: @escaping CreditKit.CreditInformationResult)
 }
 
-public class CreditKit: CreditKitType {
+public class CreditKit: NSObject, CreditKitType {
     
     // MARK: - Properties -
     
@@ -55,7 +55,7 @@ public class CreditKit: CreditKitType {
     
     // MARK: - Public -
 
-    public func fetchCreditScore(result: @escaping CreditInformationResult) {
+    public func fetchCreditInformation(result: @escaping CreditInformationResult) {
         session.dataTask(with: Endpoint.creditInformation.url) { data, response, error in
             guard let data = data else {
                 self.finish { result(.failure(.invalidResponse)) }
@@ -65,7 +65,7 @@ public class CreditKit: CreditKitType {
             self.handleData(data: data, result: result)
         }.resume()
     }
-    
+        
     // MARK: - Private -
     
     private func handleData(data: Data?, result: @escaping CreditInformationResult) {

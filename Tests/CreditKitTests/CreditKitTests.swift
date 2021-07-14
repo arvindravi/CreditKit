@@ -21,7 +21,7 @@ final class CreditKitTests: XCTestCase {
     
     func test_fetchCreditInformation() {
         let mockCreditInformationURL = URL(string: "https://5lfoiyb0b3.execute-api.us-west-2.amazonaws.com/prod/mockcredit/values")!
-        let mockCreditInformationResponse = CreditInformationRawResponse.mock
+        let mockCreditInformationResponse = CreditInformationRawResponse.mock(score: 42)
         
         URLProtocolStub.testURLs = [
             mockCreditInformationURL: try! mockCreditInformationResponse.jsonData()
@@ -29,13 +29,12 @@ final class CreditKitTests: XCTestCase {
         
         let expectation = expectation(description: "Fetch Credit Score")
         
-        subject.fetchCreditScore { result in
+        subject.fetchCreditInformation { result in
             switch result {
             case .success(let creditInformation):
-                XCTAssertEqual(creditInformation.creditReportInfo.score, 514)
+                XCTAssertEqual(creditInformation.creditReportInfo.score, 42)
                 expectation.fulfill()
-            case .failure(let error):
-                print(error)
+            case .failure:
                 XCTFail()
             }
         }
